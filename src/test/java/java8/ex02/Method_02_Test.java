@@ -6,6 +6,7 @@ import org.junit.Test;
 
 import java8.data.Data;
 import java8.data.Person;
+import java8.ex02.Method_02_Test.IDao;
 
 /**
  * Exercice 02 - Redéfinition
@@ -19,13 +20,17 @@ public class Method_02_Test {
         // TODO créer une méthode String format()
         // TODO la méthode retourne une chaîne de la forme [<nb_personnes> persons]
         // TODO exemple de résultat : "[14 persons]", "[30 persons]"
+        default String format() {
+        	int nbPersons = findAll().size();
+        	return "[" + nbPersons + " persons ]";
+        }
     }
     // end::IDao[]
 
     // tag::DaoA[]
     class DaoA implements IDao {
 
-        List<Person> people = Data.buildPersonList(20);
+		List<Person> people = Data.buildPersonList(20);
 
         @Override
         public List<Person> findAll() {
@@ -36,6 +41,13 @@ public class Method_02_Test {
         // TODO la méthode retourne une chaîne de la forme DaoA[<nb_personnes> persons]
         // TODO exemple de résultat : "DaoA[14 persons]", "DaoA[30 persons]"
         // TODO l'implémentation réutilise la méthode format() de l'interface
+        
+        @Override
+		public String format() {
+			// TODO Auto-generated method stub
+			return "DaoA"+IDao.super.format();
+		}
+
 
     }
     // end::DaoA[]
@@ -46,7 +58,7 @@ public class Method_02_Test {
         DaoA daoA = new DaoA();
 
         // TODO invoquer la méthode format() pour que le test soit passant
-        String result = null;
+        String result = daoA.format();
 
         "DaoA[20 persons]".equals(result);
     }
