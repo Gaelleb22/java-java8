@@ -5,6 +5,7 @@ import org.junit.Test;
 import java.util.function.Consumer;
 import java.util.function.UnaryOperator;
 import java.util.logging.Logger;
+import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import java.util.stream.LongStream;
 import java.util.stream.Stream;
@@ -34,7 +35,8 @@ public class Stream_05_Test {
     // TODO utiliser la méthode Stream.iterate
     // TODO cette méthode doit produire le même résultat que imperativeSum
     private long iterateSum(long n) {
-        return 0;
+        return Stream.iterate(1, l -> l+1).limit(n)
+        		.collect(Collectors.counting());
     }
 
     // TODO exécuter le test pour vérifier que les méthodes imperativeSum et iterateSum produisent le même résultat
